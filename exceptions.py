@@ -7,12 +7,6 @@ class NoEnvirVariablesError(Exception):
     pass
 
 
-class NotValidResponseError(Exception):
-    """Выбросить при несоответствии ответа документации."""
-
-    pass
-
-
 class NotValidHomeworkStatusError(Exception):
     """Выбросить при неожиданном статусе домашней работы."""
 
