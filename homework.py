@@ -72,10 +72,10 @@ def send_message(bot: TeleBot, message: str) -> None:
 def get_api_answer(timestamp: int) -> dict:
     """Отправить запрос к API и вернуть ответ в случае успеха."""
     payload = {'from_date': timestamp}
+    logger.info(
+        f'Запрос к API. Url {ENDPOINT}, параметры {payload}.'
+    )
     try:
-        logger.info(
-            f'Запрос к API. Url {ENDPOINT}, параметры {payload}.'
-        )
         response = requests.get(
             ENDPOINT,
             headers=HEADERS,
@@ -155,9 +155,9 @@ def main() -> None:
                 homework = homeworks[0]
                 status_message = parse_status(homework)
                 send_message(bot, status_message)
+                last_error = ''
             else:
                 logger.debug('Статус домашней работы не обновился.')
-            last_error = ''
             timestamp = response.get('current_date') or int(time.time())
         except Exception as error:
             current_error_message = f'Сбой в работе программы: {error}'
